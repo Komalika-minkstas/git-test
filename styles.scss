@@ -76,30 +76,13 @@ body{
     z-index: 1;
 }
 
-#loginModal{
-
-    .modal-content{
-      .modal-header{
-           background: $background-dark;
-
-       }
-       .modal-body{
-           background: $background-pale;
-
-       }
-    }
+.modal-header{
+           background-color: $background-dark;
+           color: floralwhite;
+           .close{
+               color: floralwhite;
+           }
 }
-
-#reservemodal{
-      
-    .modal-content{
-      .modal-header{
-           background: $background-dark;
-
-       }
-       .modal-body{
-           background: $background-pale;
-
-       }
-    }
+.modal-body{
+      background: $background-pale;
 }
