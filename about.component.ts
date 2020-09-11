@@ -9,13 +9,21 @@ import { LeaderService } from '../services/leader.service';
   styleUrls: ['./about.component.scss']
 })
 export class AboutComponent implements OnInit {
+ 
   leader: Leader;
-
-  constructor(private leaderService: LeaderService) { }
+  leaders: Leader[];
+  selectedDish: Leader;
+  constructor(private leaderservice: LeaderService) { }
   
 
   ngOnInit() {
-    this.leader = this.leaderService.getFeaturedLeader();
+ 
+    this.leaders = this.leaderservice.getLeaders();
+    this.leader = this.leaderservice.getFeaturedLeader();
   }
+  onSelect(leader: Leader) {
+    this.selectedDish =leader;
+  }
+ 
 
 }
