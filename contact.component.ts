@@ -8,6 +8,9 @@ import { Feedback, ContactType } from '../shared/feedback';
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent implements OnInit {
+  feedbackForm: FormGroup;
+  feedback: Feedback;
+  contactType = ContactType;
 
   constructor(private fb: FormBuilder) {
     this.createForm();
