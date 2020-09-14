@@ -10,20 +10,21 @@ import { LeaderService } from '../services/leader.service';
 })
 export class AboutComponent implements OnInit {
  
-  leader: Leader;
-  leaders: Leader[];
-  selectedDish: Leader;
-  constructor(private leaderservice: LeaderService) { }
-  
-
-  ngOnInit() {
+   leaders: Leader[];
  
-    this.leaders = this.leaderservice.getLeaders();
-    this.leader = this.leaderservice.getFeaturedLeader();
+   selectedDish: Leader;
+   leader: Leader;
+  
+   constructor(private leaderservice: LeaderService) { }
+  
+    ngOnInit() {
+    
+    //this.leader = this.leaderService.getFeaturedLeader();
+    this.leaderservice.getLeaders().then(leaders => this.leaders = leaders);;
+    this.leaderservice.getFeaturedLeader().then(leader => this.leader = leader);
   }
   onSelect(leader: Leader) {
     this.selectedDish =leader;
   }
- 
 
 }
