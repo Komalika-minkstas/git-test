@@ -20,8 +20,8 @@ export class AboutComponent implements OnInit {
     ngOnInit() {
     
     //this.leader = this.leaderService.getFeaturedLeader();
-    this.leaderservice.getLeaders().then(leaders => this.leaders = leaders);;
-    this.leaderservice.getFeaturedLeader().then(leader => this.leader = leader);
+    this.leaderservice.getLeaders().subscribe(leaders => this.leaders = leaders);;
+    this.leaderservice.getFeaturedLeader().subscribe(leader => this.leader = leader);
   }
   onSelect(leader: Leader) {
     this.selectedDish =leader;
