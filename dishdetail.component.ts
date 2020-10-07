@@ -4,8 +4,7 @@ import { Params, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Dish } from '../shared/dish';
 import { switchMap } from 'rxjs/operators';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Comment } from '../shared/comment';
+
 
 
 
@@ -22,46 +21,22 @@ export class DishdetailComponent implements OnInit {
   dishIds: string[];
   prev: string;
   next: string;
-  @ViewChild('cform') commentFormDirective;
-  comment: Comment;
-  commentForm: FormGroup;
   
   
-  max = 5;
-  min = 1;
-  value = 4;
-  step = 1;
-  thumbLabel = true;
-  curDate = new Date();
-
- formErrors = {
-      'authorname': '',
-      'comment':''
-    };
+  
+  
  
    
-     validationMessages = {
-      'authorname': {
-        'required':      'Name is required.',
-        'minlength':     'Name must be at least 2 characters long.',
-        'maxlength':     'Name cannot be more than 25 characters long.'
-      },
-      'comment': {
-        'required':      'Comment is required.',
-        'minlength':     'Comment must be at least 5 characters long.',
-        'maxlength':     'Comment cannot be more than 250 characters long.'
-      },
-    };
-
+     
   constructor(private dishService: DishService,
      private route: ActivatedRoute,
      private location: Location,
-       private fb:FormBuilder, @Inject('BaseURL') private BaseURL) { }
+    @Inject('BaseURL') private BaseURL) { }
     
 
    
    ngOnInit() {
-   this.createForm();
+   
   
    this.dishService.getDishIds().subscribe(dishIds => this.dishIds = dishIds);
     this.route.params.pipe(switchMap((params: Params) => this.dishService.getDish(params['id'])))
@@ -75,55 +50,6 @@ export class DishdetailComponent implements OnInit {
   }
  goBack(): void {
     this.location.back();
-}
- createForm() {
-    this.commentForm = this.fb.group({
-     authorname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)]],
-     comment: ['', [Validators.required, Validators.minLength(6)]],
-     slider: ['']
-  });
- this.commentForm.valueChanges
-    .subscribe(data => this.onValueChanged(data));
-
-  this.onValueChanged(); 
-}
-  
-onValueChanged(data?: any) {
-  if (!this.commentForm) { return; }
-  const form = this.commentForm;
-  for (const field in this.formErrors) {
-    if (this.formErrors.hasOwnProperty(field)) {
-      // clear previous error message (if any)
-      this.formErrors[field] = '';
-      const control = form.get(field);
-      if (control && control.dirty && !control.valid) {
-        const messages = this.validationMessages[field];
-        for (const key in control.errors) {
-          if (control.errors.hasOwnProperty(key)) {
-            this.formErrors[field] += messages[key] + ' ';
-          }
-        }
-      }
-    }
-  }
-}
-
- onSubmit() {
-    this.dish.comments.push({rating: this.commentForm.value.slider,
-    author: this.commentForm.value.authorname,
-    comment: this.commentForm.value.comment,
-    date: this.curDate.toString()});
-
-                                                
-    
-    this.commentForm.reset({
-       authorname: '',
-       comment: '',
-       slider: '4'
-    });
-    this.commentFormDirective.resetForm();
-    
-  
 }
 }
  

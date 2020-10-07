@@ -53,38 +53,6 @@
      </mat-card-content>
     </mat-card>
   </div>
-  <div fxFlex fxFlexOffset="20px" class="form-size">
-  <mat-list *ngIf="commentForm.valid">
-   <mat-list-item>
-    <h4 matLine> {{commentForm.get('comment').value}} </h4>
-    <p matLine> {{commentForm.get('rating').value}} Stars</p>
-    <p matLine> {{commentForm.get('authorname').value}} </p>
-   </mat-list-item>  
-  <mat-card-content>
-    <p>{{ commentForm.value | json }} {{ commentForm.value.invalid }}</p>
-    <form novalidate [formGroup]="commentForm" #cform="ngForm" (ngSubmit)="onSubmit()" style="padding-left: 32px;">
-      <p>
-        <mat-form-field class="half-width" style="width: 300px;">
-          <input matInput formControlName="authorname" placeholder="Name" type="text" required>
-          <mat-error *ngIf="formErrors.authorname">{{formErrors.authorname}}
-          </mat-error>
-        </mat-form-field>
-      </p>  
-      <p>
-         <mat-slider formcontrolname="slider" style="width: 300px;" [max]="max" [min]="min" [step]="step" [thumblabel]="thumblabel" [value]="value">
-         </mat-slider>
-      </p>
-       <p>
-        <mat-form-field class="full-width" style="width: 300px;">
-          <textarea matInput formControlName="comment" placeholder="Your Comment" rows=12 required></textarea>
-          <mat-error *ngIf="formErrors.comment">{{formErrors.comment}}
-          </mat-error>
-        </mat-form-field>
-      </p>
-      <button type="submit" mat-button class="background-primary text-floral-white" [disabled]="feedbackForm.invalid">Submit</button>
-    </form>
-  </mat-card-content>
-  </div>
-</div>
+  
 
 </div>
